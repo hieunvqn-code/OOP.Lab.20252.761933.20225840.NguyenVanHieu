@@ -1,0 +1,19 @@
+Phần 7:
+- When should accessor methods be used?
+   + Khi nghiệp vụ hệ thống yêu cầu truy xuất dữ liệu: 
+	. Các phương thức Accessor chỉ nên được tạo khi có một kịch bản sử dụng (Use Case) cụ thể yêu cầu hiển thị hoặc xử lý thông tin đó từ bên ngoài lớp.
+	. Trong dự án AIMS, tất cả các Getters của lớp DigitalVideoDisc được sử dụng vì hệ thống cần hiển thị toàn bộ thông tin sản phẩm khi khách hàng xem giỏ hàng.
+   + Khi cần tuân thủ các tiêu chuẩn lập trình (Frameworks):
+	. Accessor methods thường bắt buộc phải có khi làm việc với các chuẩn như JavaBeans, nơi các công cụ hoặc framework cần các phương thức get và set để tự động hóa việc ánh xạ dữ liệu.
+   + Khi áp dụng nguyên tắc đóng gói (Encapsulation)
+	. Thay vì để các thuộc tính là public, việc sử dụng Accessor giúp bạn kiểm soát cách dữ liệu được trả ra ngoài, ví dụ như trả 	về một bản sao thay vì đối tượng gốc để tránh bị chỉnh sửa ngoài ý muốn
+   + Khi nào KHÔNG nên dùng: 
+	.Vi phạm tính đóng gói: Việc tạo Getter cho mọi thuộc tính thực chất là biến các biến private thành public một cách gián tiếp, làm lộ chi tiết cài đặt nội bộ của lớp.
+	.Tăng độ phụ thuộc (Tight Coupling): Nếu lớp A gọi get từ lớp B để xử lý logic, lớp A sẽ phụ thuộc chặt chẽ vào cấu trúc của lớp B. Nếu lớp B thay đổi kiểu dữ liệu, lớp A cũng sẽ bị lỗi.
+	.Nguyên tắc "Tell, Don't Ask": Thay vì lấy dữ liệu từ một đối tượng để tính toán, bạn nên yêu cầu đối tượng đó tự thực hiện phép tính và trả về kết quả cuối cùng.
+Phần 8:
+- If you create a constructor method to build a DVD by title then create a constructor method to build a DVD by category. Does JAVA allow you to do this? 
+	+Nạp chồng Chữ ký phương thức: Java phân biệt các constructor nạp chồng dựa trên số lượng, kiểu dữ liệu và thứ tự của các tham số truyền vào .
+	+Xung đột xảy ra khi:Constructor tạo DVD bằng tiêu đề (title) sẽ có dạng: public DigitalVideoDisc(String title).Constructor tạo DVD bằng danh mục (category) sẽ có dạng: public DigitalVideoDisc(String category).
+	+Vấn đề: Cả hai constructor trên đều có chữ ký là DigitalVideoDisc(String). Java không thể phân biệt được bạn đang muốn gọi cái nào chỉ dựa vào một giá trị kiểu String .
+	+Lỗi biên dịch: Nếu bạn cố tình viết cả hai trong IntelliJ IDEA, IDE sẽ báo lỗi đỏ ngay lập tức với nội dung phương thức đã được định nghĩa sẵn trong lớp (method is already defined).
